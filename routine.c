@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: beyza <beyza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/03 16:29:45 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/08/04 16:09:10 by beyza            ###   ########.fr       */
+/*   Created: 2024/08/02 17:31:16 by halozdem          #+#    #+#             */
+/*   Updated: 2024/08/04 18:21:36 by beyza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	dead_check(t_data *data)
 		{
 			pthread_mutex_lock(&data->philo[j].last_meal_mutex);
 			if ((get_current_time()
-					- data->philo[j].time_of_last_meal) > data->timo_to_die
+					- data->philo[j].time_of_last_meal) >= data->timo_to_die
 				&& !data->end)
 			{
 				ft_print(&data->philo[j], "died");
@@ -49,6 +49,7 @@ void	*routine(void *arg)
 		{
 			eating(philo);
 			sleeping(philo);
+			thinking(philo);
 		}
 		else
 		{

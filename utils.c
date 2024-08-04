@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: beyza <beyza@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/03 16:29:50 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/08/04 16:10:30 by beyza            ###   ########.fr       */
+/*   Created: 2024/08/02 17:31:20 by halozdem          #+#    #+#             */
+/*   Updated: 2024/08/04 18:20:40 by beyza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,9 @@ void	ft_usleep(size_t ms)
 
 int	ft_print(t_philo *philo, char *state)
 {
-	if (philo->t_data->end == false)
-	{
 	pthread_mutex_lock(philo->message);
 	printf("%zu %d %s\n", get_current_time() - philo->t_data->start_time,
 		philo->id + 1, state);
 	pthread_mutex_unlock(philo->message);
-	}
 	return (EXIT_SUCCESS);
 }
