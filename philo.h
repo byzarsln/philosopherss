@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: beyarsla <beyarsla@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/03 16:29:40 by beyarsla          #+#    #+#             */
+/*   Updated: 2024/08/03 17:18:46 by beyarsla         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <pthread.h>
-#include <unistd.h> //usleep için
-#include <stdio.h>
-#include <sys/time.h>
-#include <stdlib.h> //malloc için
-#include <stdbool.h>
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h> //malloc için
+# include <sys/time.h>
+# include <unistd.h> //usleep için
 
 # define ERR_ARG "Error: Invalid args."
 # define ERR_INIT "Error: Init failed."
@@ -19,13 +31,13 @@ typedef struct s_philo
 	int				id;
 	int				chair_no;
 	size_t			time_of_last_meal;
-	int				nbr_of_meals;
+	int				eat_count;
 	int				*number_of_philo;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*message;
 	pthread_mutex_t	*end_mutex;
-	pthread_mutex_t philo_id;
+	pthread_mutex_t	philo_id;
 	pthread_mutex_t	last_meal_mutex;
 	bool			*end;
 	bool			is_thinking;
@@ -47,22 +59,23 @@ typedef struct s_data
 	bool			end;
 }					t_data;
 
-
-
-int	init_mutex(t_data *data);
-int	init_forks(t_data *data);
-int	init_philos(t_data *data);
-int	init_data(t_data *data, int argc, char **argv);
-int	init_all(t_data *data, int argc, char **argv);
-int	argv_check(char **argv);
-void	*routine(void *arg);
-int	philo_start(t_data *data);
-long	ft_atol(char *str);
-int	ft_isdigit(int c);
-size_t	get_current_time();
-void	ft_usleep(size_t	ms);
-int	ft_print(t_philo *philo, char *state);
-int	ft_strcmp(char *s1, char *s2);
-int    dead_check(t_philo *philo);
+int					init_mutex(t_data *data);
+int					init_forks(t_data *data);
+int					init_philos(t_data *data);
+int					init_data(t_data *data, int argc, char **argv);
+int					init_all(t_data *data, int argc, char **argv);
+int					argv_check(char **argv);
+void				*routine(void *arg);
+int					philo_start(t_data *data);
+long				ft_atol(char *str);
+int					ft_isdigit(int c);
+size_t				get_current_time(void);
+void				ft_usleep(size_t ms);
+int					ft_print(t_philo *philo, char *state);
+void				dead_check(t_data *data);
+void				thinking(t_philo *philo);
+void				sleeping(t_philo *philo);
+void				eating(t_philo *philo);
+int					clean_all(t_data *data);
 
 #endif
